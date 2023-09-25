@@ -1,9 +1,10 @@
 import streamlit as st
 import numpy as np
 import pickle
+import math
 
 def load_model():
-    with open('DecisionTree_Regressor_model.pkl','rb') as file:
+    with open('XGBRegressor_model.pkl','rb') as file:
         model = pickle.load(file)
     return model
 
@@ -39,7 +40,7 @@ input_data = np.array([num_advocates, num_issues, num_laws, num_precedents]).res
 prediction = model.predict(input_data)[0]
 
 if st.button('Predict'):
-    st.write('Predicted No. of Hearings:', prediction)
+    st.write('Predicted No. of Hearings:', math.ceil(prediction))
     #case complexity
     classify_case_complexity(num_issues,num_laws,num_precedents)
     
